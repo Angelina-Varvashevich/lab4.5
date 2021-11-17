@@ -12,22 +12,18 @@ void ControlRadix(int radix) {
 }
 
 int LengthStr(int radix, int value) {
-    if (value >= 0) {
-        return log(value + 1) / log(radix) + 1;
-    } else {
-        return log((-1) * value + 1) / log(radix) + 2;
-    }
+    int size_for_positive = log(value + 1) / log(radix) + 1;
+    int size_for_negative =log((-1) * value + 1) / log(radix) + 2;
+    return (value >= 0) ? (size_for_positive) : (size_for_negative);
 }
 
 int OutputStr(int value, int radix) {
-    if (value % radix <= 9) {
-        return value % radix + 48;
-    } else {
-        return value % radix + 55;
-    }
+    int reduction_number =value % radix + 48;
+    int reduction_letter =value % radix + 55;
+    return (value % radix <= 9) ? (reduction_number) : (reduction_letter);
 }
 
-char *Iota(char *str, int value, int radix) {/// посмотри тип функций + задание i+ ссылки
+char *Iota(char *str, int value, int radix) {
     int size = LengthStr(radix, value) - 1;
     str[LengthStr(radix, value)] = '\0';
     if (value < 0) {
